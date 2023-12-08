@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Jukebox</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="./Assets/css/style.css">
   </head>
   <body>
     <header>
         <h1 class="title has-text-success has-text-centered">Jukebox</h1>
     </header>
-    <main class="container is-flex is-justify-content-center">
+    <main class="container is-flex is-justify-content-center is-align-items-center is-flex-direction-column">
+        <img src="./Assets/images/jukebox.png" alt="">
         <div class="modal" id="music-modal-card">
             <div class="modal-background"></div>
                 <div class="modal-card">
@@ -28,6 +30,7 @@
             </div>
         </div>
         <button class="button is-dark" onclick="showModal()">Give me a song</button>
+        <a href="./favorites.html" class="button">Favorites</a>
     </main>
     <script src="./Assets/js/script.js"></script>
   </body>

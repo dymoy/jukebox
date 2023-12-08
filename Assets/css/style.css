@@ -1,5 +1,4 @@
-main {
-    height: 500px;
-    width: 200px;
-    border: 5px black solid;
+img {
+    max-width: 500px;
+    
 }
