@@ -34,9 +34,9 @@
                     </header>
                     <section class="modal-card-body">
                         <!-- Album Art here -->
-                        <div id="track-album-art-container">
+                        <div id="track-album-art-container" style="margin: auto;" class="has-text-centered">
                             <img id="album-art-image" src="" alt="">
-                        </div>
+                        </div>                        
                         <div id="track-info" class="has-text-centered">
                             <p id="track-title">Title</p>
                             <p id="track-artist">Artist</p>
@@ -45,7 +45,7 @@
                     </section>
                     <footer class="modal-card-foot">
                         <button class="btn favorite-btn" aria-label="save" onclick="favoriteTrack()">
-                            <i class="fa-regular fa-heart" aria-hidden="true"></i>
+                            <i class="fa-regular fa-heart" id="heart-icon" aria-hidden="true"></i>
                           </button>
                     </footer>
                 </div>
@@ -56,7 +56,7 @@
             <input type="search" id="search-input" placeholder="e.g. water" name="q" class="my-1" />
             <button id="search-input-btn" onclick="showModal()">Search</button>
         </div>
-        <!-- <a href="./favorites.html" class="button">Favorites</a> -->
+        <a href="./favorites.html" class="button">Favorites</a>
     </main>
     <script src="./Assets/js/script.js"></script>
   </body>
