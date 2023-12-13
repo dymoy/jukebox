@@ -12,10 +12,13 @@ function closeModal() {
 
 // favoriteTrack() will save the track in local storage with (key: track title, val: song object)
 function favoriteTrack() {
+
   var trackTitle = document.getElementById("track-title").innerText;
   var trackArtist = document.getElementById("track-artist").innerText;
   var trackAlbum = document.getElementById("track-album").innerText;
   var albumArtUrl = document.getElementById("album-art-image").src;
+  var duration = document.getElementById("track-duration").innerText;
+
   if (isFavorited(trackTitle)) {
     alert("This song is already in your favorites!");
     return;
@@ -26,6 +29,7 @@ function favoriteTrack() {
     artist: trackArtist,
     album: trackAlbum,
     albumArtUrl: albumArtUrl,
+    duration: duration,
   };
 
   saveToLocalStorage(trackTitle, songObject);
@@ -43,12 +47,14 @@ function saveToLocalStorage(trackTitle, songObject) {
   localStorage.setItem("favorites", JSON.stringify(favorites));
 }
 
+
+
 // getAPI() function uses fetch method to get track data
 function getAPI(url, options) {
   fetch(url, options)
     .then(function (response) {
       // Check response status
-      if (response.status !== 200) {
+      if (response.status !== 200) { //200 : success
         // Endpoint not found
         console.log(response.status);
         alert("No song found. Please try again.");
@@ -56,8 +62,8 @@ function getAPI(url, options) {
       }
       return response.json();
     })
-    .then(function (data) {
-      // console.log(data);
+    .then(function (data) { //sucess
+      console.log(data);
       presentTrack(data.tracks.items[0].data);
     });
 }
@@ -73,22 +79,29 @@ function presentTrack(trackData) {
   console.log("trackData ", trackData);
   document.getElementById("album-art-image").src =
     trackData.albumOfTrack.coverArt.sources[0].url;
-  //set width
-  document.getElementById(
-    "album-art-image"
-  ).style.width = `${trackData.albumOfTrack.coverArt.sources[0].width}px`;
-  document.getElementById(
-    "album-art-image"
-  ).style.height = `${trackData.albumOfTrack.coverArt.sources[0].height}px`;
+
+
   document.getElementById(
     "track-title"
   ).innerHTML = `<b>Title :</b> ${trackData.name}`;
+
   document.getElementById(
     "track-artist"
   ).innerHTML = `<b>Artist :</b> ${trackData.artists.items[0].profile.name}`;
+
+
   document.getElementById(
     "track-album"
   ).innerHTML = `<b>Album :</b> ${trackData.albumOfTrack.name}`;
+
+  document.getElementById("track-duration").innerHTML = `<b>Duration :</b> ${secondsToMinutes(trackData.duration.totalMilliseconds/1000)}`;
+}
+
+
+function secondsToMinutes(seconds) {
+  var minutes = Math.floor(seconds / 60); //206/60 => minutes
+  var seconds = seconds - minutes * 60; // totalseconds - minutes * 60 
+  return minutes + "mins " + parseInt(seconds) +"secs";
 }
 
 // queryURL() function constructs URL to fetch from Web API

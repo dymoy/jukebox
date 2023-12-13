@@ -28,6 +28,7 @@ function createFavoriteCard(favorite) {
                 <p class="title is-4">${favorite.title}</p>
                 <p class="subtitle is-6">${favorite.artist}</p>
                 <p class="subtitle is-6">${favorite.album}</p>
+                <p class="subtitle is-6">${favorite.duration}</p>
             </div>
             <footer class="card-footer">
                 <button class="card-footer-item button is-danger mb-3" onclick="removeFromFavorites('${favorite.title}')">
@@ -38,6 +39,8 @@ function createFavoriteCard(favorite) {
     `;
   favoritesContainer.appendChild(card);
 }
+
+
 
 function removeFromFavorites(title) {
   var favorites = JSON.parse(localStorage.getItem("favorites")) || {};
