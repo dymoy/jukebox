@@ -1,14 +1,24 @@
-var musicModal = document.getElementById("music-modal-card");
+var musicModal = $("#track-modal-card");
 var searchInputEl = $("#search-input");
 
-// function showModal() {
-//     musicModal.classList.add('is-active');
-//     queryURL();
-// }
+function showModal() {
+    musicModal.addClass('is-active');
+    queryInput();
+}
 
-// function closeModal() {
-//     musicModal.classList.remove('is-active');
-// }
+function closeModal() {
+    musicModal.removeClass('is-active');
+}
+
+// favoriteTrack() will save the track in local storage with (key: track title, val: song object)
+function favoriteTrack() { 
+    // TODO: check if song is already favorited
+    // if (isFavorited) { notify user }
+    // else (!isFavorited) { 
+        // create an object with relevant attributes needed to display in card
+        // add the song to local storage 
+    //} 
+}
 
 // getAPI() function uses fetch method to get track data 
 function getAPI(url, options) {
@@ -39,9 +49,7 @@ function presentTrack(trackData) {
     console.log(trackData);
 }
 
-// TODO: Favorite functionality: store song into local storage with (key: song title, val: song object)
-
-// TODO: queryURL() function constructs URL to fetch from Web API 
+// queryURL() function constructs URL to fetch from Web API 
 async function queryInput () {
     var q = searchInputEl.val();
     var offset = getRandomOffset();

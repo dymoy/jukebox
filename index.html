@@ -12,6 +12,11 @@
       integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
       crossorigin="anonymous"
     ></script>
+    <!-- Link Font Awesome library -->
+    <script 
+        src="https://kit.fontawesome.com/7304273867.js" 
+        crossorigin="anonymous">
+    </script>
     <link rel="stylesheet" href="./Assets/css/style.css">
   </head>
   <body>
@@ -20,24 +25,28 @@
     </header>
     <main class="container is-flex is-justify-content-center is-align-items-center is-flex-direction-column">
         <img src="./Assets/images/jukebox.png" alt="">
-        <div class="modal" id="music-modal-card">
+        <div class="modal" id="track-modal-card">
             <div class="modal-background"></div>
                 <div class="modal-card">
                     <header class="modal-card-head">
-                        <p class="modal-card-title">Song Title here</p>
+                        <p class="modal-card-title"></p>
                         <button class="delete" aria-label="close" onclick="closeModal()"></button>
                     </header>
                     <section class="modal-card-body">
                         <!-- Album Art here -->
-                        <div id="track-album-art"></div>
-                        <div id="track-info">
+                        <div id="track-album-art-container">
+                            <img id="album-art-image" src="" alt="">
+                        </div>
+                        <div id="track-info" class="has-text-centered">
                             <p id="track-title">Title</p>
                             <p id="track-artist">Artist</p>
                             <p id="track-album">Album</p>
                         </div>
                     </section>
                     <footer class="modal-card-foot">
-                        <button class="button is-success">Favorite</button>
+                        <button class="btn favorite-btn" aria-label="save" onclick="favoriteTrack()">
+                            <i class="fa-regular fa-heart" aria-hidden="true"></i>
+                          </button>
                     </footer>
                 </div>
             </div>
@@ -45,7 +54,7 @@
         <div id="search-container" class="">
             <h2>Give me a word and I'll find a song for you!</h2>
             <input type="search" id="search-input" placeholder="e.g. water" name="q" class="my-1" />
-            <button id="search-input-btn" onclick="queryInput()">Search</button>
+            <button id="search-input-btn" onclick="showModal()">Search</button>
         </div>
         <!-- <a href="./favorites.html" class="button">Favorites</a> -->
     </main>
