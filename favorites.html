@@ -6,11 +6,25 @@
     <title>Favorites</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="./Assets/css/style.css">
+    <script 
+        src="https://kit.fontawesome.com/7304273867.js" 
+        crossorigin="anonymous">
+    </script>
 </head>
 
 <body>
-    <header>
-        <a href="./index.html" class="title has-text-success has-text-centered">Jukebox</h1>
+    <header class="is-flex is-justify-content-center mt-3">
+        <a href="./index.html" class="title has-text-success">Jukebox</a>
     </header>
+    
+
+    <main class="section">
+        <div class="container">
+            <div id="favorites-container" class="columns is-multiline"></div>
+            <p id="no-favorites-message" class="has-text-centered is-hidden">No favorites yet!</p>
+        </div>
+    </main>
+
+    <script src="./Assets/js/favorites.js"></script>
 </body>
 </html>
