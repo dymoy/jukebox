@@ -59,5 +59,25 @@
         <!-- <a href="./favorites.html" class="button">Favorites</a> -->
     </main>
     <script src="./Assets/js/script.js"></script>
+     <script>
+        
+        fetch("https://spotify23.p.rapidapi.com/search/?q=your_query_here", {
+            headers: {
+                "X-RapidAPI-Key": "" // Add our api key
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            
+            data.songs.forEach(song => {
+                const markup = `
+                <li>
+                    <strong>${song.title}</strong> by ${song.artist} (${song.album})
+                </li>`;
+                document.querySelector('#userList').insertAdjacentHTML('beforeend', markup);
+            });
+        })
+        .catch(error => console.error(error));
+    </script>
   </body>
 </html>
