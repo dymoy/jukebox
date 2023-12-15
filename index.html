@@ -44,11 +44,12 @@
                             <p id="track-album">Album</p>
                             <p id="track-duration">Duration</p>
                         </div>
-                    </section>
-                    <footer class="modal-card-foot">
                         <button class="btn favorite-btn" aria-label="save" onclick="favoriteTrack()">
                             <i class="fa-regular fa-heart" id="heart-icon" aria-hidden="true"></i>
-                          </button>
+                        </button>
+                    </section>
+                    <footer class="modal-card-foot is-align-items-center">
+                        <div id="embed-iframe"></div>
                     </footer>
                 </div>
             </div>
@@ -61,25 +62,5 @@
         <a href="./favorites.html" class="button">Favorites</a>
     </main>
     <script src="./Assets/js/script.js"></script>
-     <script>
-        
-        fetch("https://spotify23.p.rapidapi.com/search/?q=your_query_here", {
-            headers: {
-                "X-RapidAPI-Key": "" // Add our api key
-            }
-        })
-        .then(res => res.json())
-        .then(data => {
-            
-            data.songs.forEach(song => {
-                const markup = `
-                <li>
-                    <strong>${song.title}</strong> by ${song.artist} (${song.album})
-                </li>`;
-                document.querySelector('#userList').insertAdjacentHTML('beforeend', markup);
-            });
-        })
-        .catch(error => console.error(error));
-    </script>
   </body>
 </html>
