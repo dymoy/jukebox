@@ -113,7 +113,7 @@ function loadIFrame(trackData) {
           uri: trackData.uri
         };
         const callback = (EmbedController) => {
-            EmbedController.loadURI(trackData.uri);
+            EmbedController.loadUri(trackData.uri);
 
         }
 
