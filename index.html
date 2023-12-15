@@ -20,8 +20,15 @@
     <link rel="stylesheet" href="./Assets/css/style.css">
   </head>
   <body>
+    <style>
+        body{
+    background: url(Assets/images/vibe.png);
+    height: 100vh;
+    
+}
+    </style>
     <header>
-        <h1 class="title has-text-success has-text-centered">Jukebox</h1>
+        <h1 class="title has-text-white has-text-centered">Jukebox</h1>
     </header>
     <main class="container is-flex is-justify-content-center is-align-items-center is-flex-direction-column">
         <img src="./Assets/images/jukebox.png" alt="">
@@ -53,7 +60,7 @@
                 </div>
             </div>
         </div>
-        <div id="search-container" class="">
+        <div id="search-container" class="has-text-white">
             <h2>Give me a word and I'll find a song for you!</h2>
             <input type="search" id="search-input" placeholder="e.g. water" name="q" class="my-1" />
             <button id="search-input-btn" onclick="showModal()">Search</button>
@@ -61,25 +68,6 @@
         <a href="./favorites.html" class="button">Favorites</a>
     </main>
     <script src="./Assets/js/script.js"></script>
-     <script>
-        
-        fetch("https://spotify23.p.rapidapi.com/search/?q=your_query_here", {
-            headers: {
-                "X-RapidAPI-Key": "" // Add our api key
-            }
-        })
-        .then(res => res.json())
-        .then(data => {
-            
-            data.songs.forEach(song => {
-                const markup = `
-                <li>
-                    <strong>${song.title}</strong> by ${song.artist} (${song.album})
-                </li>`;
-                document.querySelector('#userList').insertAdjacentHTML('beforeend', markup);
-            });
-        })
-        .catch(error => console.error(error));
-    </script>
+    <body>
   </body>
 </html>
