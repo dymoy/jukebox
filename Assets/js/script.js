@@ -66,7 +66,6 @@ function getAPI(url, options) {
         return response.json();
     })
     .then(function (data) { //success
-        console.log(data);
         presentTrack(data.tracks.items[0].data);
     });
 }
@@ -79,8 +78,13 @@ function getRandomOffset() {
 // Display song information into Modal HTML element
 function presentTrack(trackData) {
     console.log("trackData ", trackData);
-    document.getElementById("album-art-image").src =
-    trackData.albumOfTrack.coverArt.sources[0].url;
+    try {
+        document.getElementById("album-art-image").src = trackData.albumOfTrack.coverArt.sources[0].url;
+    } catch(error) {
+        // TODO: Test 
+        console.log("error caught");
+        return;
+    }
 
     document.getElementById(
     "track-title"
@@ -101,8 +105,8 @@ function presentTrack(trackData) {
 
 //
 function loadIFrame(trackData) {
-    var iframe = "<script src='https://open.spotify.com/embed/iframe-api/v1'async>";
-    body.append(iframe);
+    var iFrameScript = "<script src='https://open.spotify.com/embed/iframe-api/v1'async>";
+    body.append(iFrameScript);
 
     window.onSpotifyIframeApiReady = (IFrameAPI) => {
         var element = document.getElementById('embed-iframe');
@@ -112,9 +116,9 @@ function loadIFrame(trackData) {
           height: '120',
           uri: trackData.uri
         };
+
         const callback = (EmbedController) => {
             EmbedController.loadUri(trackData.uri);
-
         }
 
         IFrameAPI.createController(element, options, callback);
@@ -139,7 +143,7 @@ async function queryInput() {
     "&type=tracks&offset=" +
     offset +
     "&limit=1";
-    console.log(url);
+
     const options = {
     method: "GET",
     headers: {
