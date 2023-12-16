@@ -49,7 +49,7 @@
                             <p id="favorite-notification" class="ml-3 is-hidden"></p>
                         </div>
                     </section>
-                    <footer class="modal-card-foot is-align-items-center">
+                    <footer class="modal-card-foot is-align-items-center" id="modal-card-footer">
                         <div id="embed-iframe"></div>
                     </footer>
                 </div>
@@ -58,7 +58,7 @@
         <div id="search-container" class="">
             <h2>Give me a word and I'll find a song for you!</h2>
             <input type="search" id="search-input" placeholder="e.g. water" name="q" class="my-1" />
-            <button id="search-input-btn" onclick="queryInput()">Search</button>
+            <button id="search-input-btn" class="search-input-btn" onclick="queryInput()">Search</button>
         </div>
         <div id="query-error-div" class="is-hidden">
             <p>Please enter a queryable word.</p>

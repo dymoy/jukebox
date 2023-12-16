@@ -6,6 +6,7 @@ function showModal() {
 // This function will close the track modal card 
 function hideModal() {
     trackModal.removeClass("is-active");
+    window.location.reload();
 }
 
 // This function will show the HTML element to notify the user the word is not queryable
@@ -28,10 +29,12 @@ function hideTrackAddedText() {
     favoriteNotification.addClass("is-hidden");
 }
 
+// This function will show the HTML modal element to notify the user that the track has been removed from favorites list 
 function showTrackRemovedModal() {
     trackRemovedNotificationDiv.classList.add('is-active');
 }
-  
+
+// This function hides the modal element
 function hideTrackRemovedModal() {
     trackRemovedNotificationDiv.classList.remove('is-active');
 }

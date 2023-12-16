@@ -1,5 +1,6 @@
 var trackModal = $("#track-modal-card");
 var searchInputEl = $("#search-input");
+var searchBtnEl = $("#search-input-btn");
 var body = $("body");
 var queryErrorDiv = $("#query-error-div");
 var favoriteNotification = $("#favorite-notification");
@@ -60,7 +61,6 @@ function favoriteTrack() {
     showTrackAddedText();
 }
 
-
 // This function will save the favorited track into local storage 
 function saveToLocalStorage(trackTitle, songObject) {
     var favorites = JSON.parse(localStorage.getItem("favorites")) || {};
@@ -91,25 +91,21 @@ function presentTrack(trackData) {
 
 // This function calls the Spotify for Developers iFrame API to display a player for users to listen to a snippet of the queried track
 function loadIFrame(trackData) {
-    // Add the iFrame API script tag to your HTML page
-    var iFrameScript = "<script src='https://open.spotify.com/embed/iframe-api/v1'async>";
+    var iFrameScript = "<script src='https://open.spotify.com/embed/iframe-api/v1' id='iframe-api-script' async></script>";
     body.append(iFrameScript);
 
-    // Define the window.onSpotifyIframeApiReady function
     window.onSpotifyIframeApiReady = (IFrameAPI) => {
         var element = document.getElementById('embed-iframe');
-    
+
         const options = {
-          width: '100%',
-          height: '120',
-          uri: trackData.uri
+            width: '100%',
+            height: '80'
         };
 
         const callback = (EmbedController) => {
             EmbedController.loadUri(trackData.uri);
         }
 
-        // Create a controller object
         IFrameAPI.createController(element, options, callback);
     };
 }
