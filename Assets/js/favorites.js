@@ -4,15 +4,19 @@ var favorites = JSON.parse(localStorage.getItem("favorites")) || {};
 var favoritesContainer = document.getElementById("favorites-container");
 var noFavoritesMessage = document.getElementById("no-favorites-message");
 
+// Collects an array of keys from local storage 
 if (Object.keys(favorites).length === 0) {
+  // No favorites found 
   noFavoritesMessage.classList.remove("is-hidden");
 } else {
+  // Create a card for each favorited track 
   Object.keys(favorites).forEach(function (key) {
     var favorite = favorites[key];
     createFavoriteCard(favorite);
   });
 }
 
+// This function creates a card for each track in favorites
 function createFavoriteCard(favorite) {
   var card = document.createElement("div");
   card.classList.add("column", "is-4");
@@ -20,28 +24,28 @@ function createFavoriteCard(favorite) {
   card.innerHTML = `
         <div class="card">
             <div class="card-image">
-                <figure class="image is-4by3">
+                <figure class="image is-square">
                     <img src="${favorite.albumArtUrl}" alt="Album Art">
                 </figure>
             </div>
-            <div class="card-content">
-                <p class="title is-4">${favorite.title}</p>
-                <p class="subtitle is-6">${favorite.artist}</p>
-                <p class="subtitle is-6">${favorite.album}</p>
-                <p class="subtitle is-6">${favorite.duration}</p>
+            <div class="card-content has-text-left">
+                <p class="is-size-5">${favorite.title}</p>
+                <p class="is-size-7">${favorite.artist}</p>
+                <p class="is-size-7">${favorite.album}</p>
+                <p class="is-size-7">${favorite.duration}</p>
             </div>
             <footer class="card-footer">
-                <button class="card-footer-item button is-danger mb-3" onclick="removeFromFavorites('${favorite.title}')">
+                <button class="card-footer-item button is-danger m-3" onclick="removeFromFavorites('${favorite.title}')">
                     Remove
                 </button>
             </footer>
         </div>
     `;
+    // Add the newly created card into the favorites container in HTML
   favoritesContainer.appendChild(card);
 }
 
-
-
+// This function will remove the track from HTML and local storage 
 function removeFromFavorites(title) {
   var favorites = JSON.parse(localStorage.getItem("favorites")) || {};
 

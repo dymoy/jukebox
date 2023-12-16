@@ -57,7 +57,10 @@
         <div id="search-container" class="">
             <h2>Give me a word and I'll find a song for you!</h2>
             <input type="search" id="search-input" placeholder="e.g. water" name="q" class="my-1" />
-            <button id="search-input-btn" onclick="showModal()">Search</button>
+            <button id="search-input-btn" onclick="queryInput()">Search</button>
+        </div>
+        <div id="query-error-div" class="is-hidden">
+            <p>Please enter a queryable word.</p>
         </div>
         <a href="./favorites.html" class="button">Favorites</a>
     </main>
