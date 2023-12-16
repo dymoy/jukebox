@@ -12,23 +12,32 @@
         crossorigin="anonymous">
     </script>
 </head>
-
 <body>
     
 <body>
     <header class="is-flex is-justify-content-center mt-3">
         <a href="./index.html" class="title has-text-white">Jukebox</a>
     </header>
-    
-
     <main class="section">
         <div class="container">
             <div id="favorites-container" class="columns is-multiline"></div>
             <p id="no-favorites-message" class="has-text-centered is-hidden">No favorites yet!</p>
         </div>
+        <div class="modal" id="track-removed-modal">
+            <div class="modal-background"></div>
+                <div class="modal-card">
+                    <header class="modal-card-head"></header>
+                    <section class="modal-card-body is-flex is-flex-direction-row is-justify-content-space-arounds">
+                        <p>Track was removed from favorites!</p>
+                    </section>
+                    <footer class="modal-card-foot is-align-items-center">
+                        <button aria-label="close" onclick="hideTrackRemovedModal()" class="px-auto">OK</button>
+                    </footer>
+                </div>
+            </div>
     </main>
-
     <script src="./Assets/js/favorites.js"></script>
+    <script src="./Assets/js/helpers.js"></script>
 </body>
 <body>
     <style>

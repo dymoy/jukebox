@@ -37,25 +37,27 @@
                 <div class="modal-card">
                     <header class="modal-card-head">
                         <p class="modal-card-title"></p>
-                        <button class="delete" aria-label="close" onclick="closeModal()"></button>
+                        <button class="delete" aria-label="close" onclick="hideModal()"></button>
                     </header>
                     <section class="modal-card-body">
-                        <!-- Album Art here -->
                         <div id="track-album-art-container" style="margin: auto;" class="has-text-centered">
                             <img id="album-art-image" src="" alt="">
-                        </div>   
-
+                        </div>  
                         <div id="track-info" class="has-text-centered">
                             <p id="track-title">Title</p>
                             <p id="track-artist">Artist</p>
                             <p id="track-album">Album</p>
                             <p id="track-duration">Duration</p>
                         </div>
+                        <div class="is-flex is-flex-direction-row">
+                            <button class="btn favorite-btn" aria-label="save" onclick="favoriteTrack()">
+                                <i class="fa-regular fa-heart" id="heart-icon" aria-hidden="true"></i>
+                            </button>
+                            <p id="favorite-notification" class="ml-3 is-hidden"></p>
+                        </div>
                     </section>
-                    <footer class="modal-card-foot">
-                        <button class="btn favorite-btn" aria-label="save" onclick="favoriteTrack()">
-                            <i class="fa-regular fa-heart" id="heart-icon" aria-hidden="true"></i>
-                          </button>
+                    <footer class="modal-card-foot is-align-items-center">
+                        <div id="embed-iframe"></div>
                     </footer>
                 </div>
             </div>
@@ -63,11 +65,16 @@
         <div id="search-container" class="has-text-white">
             <h2>Give me a word and I'll find a song for you!</h2>
             <input type="search" id="search-input" placeholder="e.g. water" name="q" class="my-1" />
-            <button id="search-input-btn" onclick="showModal()">Search</button>
+            <button id="search-input-btn" onclick="queryInput()">Search</button>
+        </div>
+        <div id="query-error-div" class="is-hidden">
+            <p>Please enter a queryable word.</p>
         </div>
         <a href="./favorites.html" class="button">Favorites</a>
     </main>
     <script src="./Assets/js/script.js"></script>
     <body>
+    <script src="./Assets/js/script.js" type="text/javascript"></script>
+    <script src="./Assets/js/helpers.js" type="text/javascript"></script>
   </body>
 </html>
