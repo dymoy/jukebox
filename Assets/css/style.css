@@ -1,3 +1,17 @@
 img {
     max-width: 500px;   
 }
+
+header {
+    background-color: whitesmoke;
+}
+
+#search-container { 
+    background-color: whitesmoke;
+    border: 
+}
+
+#favorites-btn {
+    /* position: absolute;
+    right: 0; */
+}
