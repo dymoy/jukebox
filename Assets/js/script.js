@@ -69,19 +69,9 @@ function saveToLocalStorage(trackTitle, songObject) {
 // Display song information into Modal HTML element
 function presentTrack(trackData) {
     document.getElementById("album-art-image").src = trackData.albumOfTrack.coverArt.sources[0].url;
-    
-    document.getElementById(
-    "track-title"
-    ).innerHTML = `<b>Title :</b> ${trackData.name}`;
-
-    document.getElementById(
-    "track-artist"
-    ).innerHTML = `<b>Artist :</b> ${trackData.artists.items[0].profile.name}`;
-
-    document.getElementById(
-    "track-album"
-    ).innerHTML = `<b>Album :</b> ${trackData.albumOfTrack.name}`;
-
+    document.getElementById("track-title").innerHTML = `<b>Title :</b> ${trackData.name}`;
+    document.getElementById("track-artist").innerHTML = `<b>Artist :</b> ${trackData.artists.items[0].profile.name}`;
+    document.getElementById("track-album").innerHTML = `<b>Album :</b> ${trackData.albumOfTrack.name}`;
     document.getElementById("track-duration").innerHTML = `<b>Duration :</b> ${secondsToMinutes(trackData.duration.totalMilliseconds/1000)}`;
 
     loadIFrame(trackData); 
@@ -114,19 +104,19 @@ async function queryInput() {
     var offset = getRandomOffset();
 
     const url =
-    "https://spotify23.p.rapidapi.com/search/?q=" +
-    q +
-    "&type=tracks&offset=" +
-    offset +
-    "&limit=1";
+        "https://spotify23.p.rapidapi.com/search/?q=" +
+        q +
+        "&type=tracks&offset=" +
+        offset +
+        "&limit=1";
 
     const options = {
-    method: "GET",
-    headers: {
-        "X-RapidAPI-Key": "1c600fb95amsh21018a7df31c5b0p1759f2jsn2f3a2b2758a2",
-        "X-RapidAPI-Host": "spotify23.p.rapidapi.com",
-    },
-  };
+        method: "GET",
+        headers: {
+            "X-RapidAPI-Key": "1c600fb95amsh21018a7df31c5b0p1759f2jsn2f3a2b2758a2",
+            "X-RapidAPI-Host": "spotify23.p.rapidapi.com",
+        },
+    };
 
   getAPI(url, options);
 }
