@@ -1,17 +1,18 @@
 img {
-    max-width: 500px;   
+    max-width: 450px;   
 }
 
-header {
+header, 
+#search-container {
     background-color: whitesmoke;
 }
 
-#search-container { 
-    background-color: whitesmoke;
-    border: 
+#search-container {
+    border-radius: 5px;
 }
 
-#favorites-btn {
-    /* position: absolute;
-    right: 0; */
+#search-input-btn {
+    width: 100%;
+    background-color: hsl(171, 100%, 41%);
+    border-radius: 5px;
 }

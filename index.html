@@ -24,7 +24,7 @@
         <h1 class="title has-text-success has-text-centered py-3 mb-0">Jukebox</h1>
         <h2 class="pb-2"><a href="./favorites.html" id="favorites-btn" class="has-text-success">Favorites</a></h2>
     </header>
-    <main class="container is-flex is-justify-content-center is-align-items-center is-flex-direction-column my-5 mx-auto">
+    <main class="container is-flex is-justify-content-center is-align-items-center is-flex-direction-column my-3 mx-auto">
         <img src="./Assets/images/jukebox.png" alt="">
         <div class="modal" id="track-modal-card">
             <div class="modal-background"></div>
@@ -58,11 +58,11 @@
         </div>
         <div id="search-container" class="p-5">
             <h2>Give me a word and I'll find a song for you!</h2>
-            <input type="search" id="search-input" placeholder="e.g. water" name="q" class="my-1" />
+            <input type="search" id="search-input" placeholder="e.g. water" name="q" class="my-1 Normal input" />
             <button id="search-input-btn" class="search-input-btn" onclick="queryInput()">Search</button>
-        </div>
-        <div id="query-error-div" class="is-hidden">
-            <p>Please enter a queryable word.</p>
+            <div id="query-error-div" class="is-hidden mt-3">
+                <p>Please enter a queryable word.</p>
+            </div>
         </div>
     </main>
     <script src="./Assets/js/script.js" type="text/javascript"></script>
