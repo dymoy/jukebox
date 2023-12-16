@@ -4,7 +4,6 @@ var searchBtnEl = $("#search-input-btn");
 var body = $("body");
 var queryErrorDiv = $("#query-error-div");
 var favoriteNotification = $("#favorite-notification");
-var embedIFrameDiv = $("#embed-iframe");
 
 // This getAPI() function uses fetch method to get track data
 function getAPI(url, options) {
@@ -24,7 +23,6 @@ function getAPI(url, options) {
             hideQueryError();
             showModal();
             hideTrackAddedText();
-            embedIFrameDiv.empty();
             presentTrack(trackData);
         } catch(error) {
             // TypeError caught - Query string entered is not queryable  
@@ -72,7 +70,6 @@ function saveToLocalStorage(trackTitle, songObject) {
 
 // Display song information into Modal HTML element
 function presentTrack(trackData) {
-    console.log(trackData);
     document.getElementById("album-art-image").src = trackData.albumOfTrack.coverArt.sources[0].url;
     
     document.getElementById(
@@ -89,23 +86,20 @@ function presentTrack(trackData) {
 
     document.getElementById("track-duration").innerHTML = `<b>Duration :</b> ${secondsToMinutes(trackData.duration.totalMilliseconds/1000)}`;
 
-    console.log(trackData.uri);
-    searchBtnEl.attr("data-spotify-id", trackData.uri);
     loadIFrame(trackData); 
 }
 
 // This function calls the Spotify for Developers iFrame API to display a player for users to listen to a snippet of the queried track
 function loadIFrame(trackData) {
-    var iFrameScript = "<script src='https://open.spotify.com/embed/iframe-api/v1'async></script>";
+    var iFrameScript = "<script src='https://open.spotify.com/embed/iframe-api/v1' id='iframe-api-script' async></script>";
     body.append(iFrameScript);
 
     window.onSpotifyIframeApiReady = (IFrameAPI) => {
         var element = document.getElementById('embed-iframe');
-    
+
         const options = {
-          width: '100%',
-          height: '120',
-          uri: trackData.uri
+            width: '100%',
+            height: '80'
         };
 
         const callback = (EmbedController) => {

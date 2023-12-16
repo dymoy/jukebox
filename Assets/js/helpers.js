@@ -1,12 +1,12 @@
 // This function will open the track modal card 
 function showModal() {
     trackModal.addClass("is-active");
-    // iframe.attr('src',)
 }
 
 // This function will close the track modal card 
 function hideModal() {
     trackModal.removeClass("is-active");
+    window.location.reload();
 }
 
 // This function will show the HTML element to notify the user the word is not queryable
