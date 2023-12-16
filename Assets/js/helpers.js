@@ -20,7 +20,15 @@ function hideQueryError() {
 }
 
 // This function will show the HTML element to notify the user whether track was successfully added to favorites 
-function showTrackAddedText() {
+function showTrackAddedText(bool) {
+    if (bool == false) {
+        // Track is already favorited
+        favoriteNotification.text("This song is already in your favorites!");
+    } else {
+        // Track was successfully added to favorites
+        favoriteNotification.text("Song added to favorites!");
+    }
+
     favoriteNotification.removeClass("is-hidden");
 }
 

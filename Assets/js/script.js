@@ -42,8 +42,7 @@ function favoriteTrack() {
 
     // Check if the track is already favorited 
     if (isFavorited(trackTitle)) {
-        favoriteNotification.text("This song is already in your favorites!")
-        showTrackAddedText();
+        showTrackAddedText(false);
         return;
     }
 
@@ -57,8 +56,7 @@ function favoriteTrack() {
     };
 
     saveToLocalStorage(trackTitle, songObject);
-    favoriteNotification.text("Song added to favorites!");
-    showTrackAddedText();
+    showTrackAddedText(true);
 }
 
 // This function will save the favorited track into local storage 
