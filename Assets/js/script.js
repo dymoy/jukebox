@@ -1,8 +1,10 @@
 var trackModal = $("#track-modal-card");
 var searchInputEl = $("#search-input");
+var searchBtnEl = $("#search-input-btn");
 var body = $("body");
 var queryErrorDiv = $("#query-error-div");
 var favoriteNotification = $("#favorite-notification");
+var embedIFrameDiv = $("#embed-iframe");
 
 // This getAPI() function uses fetch method to get track data
 function getAPI(url, options) {
@@ -22,6 +24,7 @@ function getAPI(url, options) {
             hideQueryError();
             showModal();
             hideTrackAddedText();
+            embedIFrameDiv.empty();
             presentTrack(trackData);
         } catch(error) {
             // TypeError caught - Query string entered is not queryable  
@@ -60,7 +63,6 @@ function favoriteTrack() {
     showTrackAddedText();
 }
 
-
 // This function will save the favorited track into local storage 
 function saveToLocalStorage(trackTitle, songObject) {
     var favorites = JSON.parse(localStorage.getItem("favorites")) || {};
@@ -70,6 +72,7 @@ function saveToLocalStorage(trackTitle, songObject) {
 
 // Display song information into Modal HTML element
 function presentTrack(trackData) {
+    console.log(trackData);
     document.getElementById("album-art-image").src = trackData.albumOfTrack.coverArt.sources[0].url;
     
     document.getElementById(
@@ -86,16 +89,16 @@ function presentTrack(trackData) {
 
     document.getElementById("track-duration").innerHTML = `<b>Duration :</b> ${secondsToMinutes(trackData.duration.totalMilliseconds/1000)}`;
 
+    console.log(trackData.uri);
+    searchBtnEl.attr("data-spotify-id", trackData.uri);
     loadIFrame(trackData); 
 }
 
 // This function calls the Spotify for Developers iFrame API to display a player for users to listen to a snippet of the queried track
 function loadIFrame(trackData) {
-    // Add the iFrame API script tag to your HTML page
-    var iFrameScript = "<script src='https://open.spotify.com/embed/iframe-api/v1'async>";
+    var iFrameScript = "<script src='https://open.spotify.com/embed/iframe-api/v1'async></script>";
     body.append(iFrameScript);
 
-    // Define the window.onSpotifyIframeApiReady function
     window.onSpotifyIframeApiReady = (IFrameAPI) => {
         var element = document.getElementById('embed-iframe');
     
@@ -109,7 +112,6 @@ function loadIFrame(trackData) {
             EmbedController.loadUri(trackData.uri);
         }
 
-        // Create a controller object
         IFrameAPI.createController(element, options, callback);
     };
 }
