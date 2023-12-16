@@ -6,6 +6,7 @@ function showModal() {
 // This function will close the track modal card 
 function hideModal() {
     trackModal.removeClass("is-active");
+    window.location.reload();
 }
 
 // This function will show the HTML element to notify the user the word is not queryable
@@ -19,7 +20,15 @@ function hideQueryError() {
 }
 
 // This function will show the HTML element to notify the user whether track was successfully added to favorites 
-function showTrackAddedText() {
+function showTrackAddedText(bool) {
+    if (bool == false) {
+        // Track is already favorited
+        favoriteNotification.text("This song is already in your favorites!");
+    } else {
+        // Track was successfully added to favorites
+        favoriteNotification.text("Song added to favorites!");
+    }
+
     favoriteNotification.removeClass("is-hidden");
 }
 
@@ -28,10 +37,12 @@ function hideTrackAddedText() {
     favoriteNotification.addClass("is-hidden");
 }
 
+// This function will show the HTML modal element to notify the user that the track has been removed from favorites list 
 function showTrackRemovedModal() {
     trackRemovedNotificationDiv.classList.add('is-active');
 }
-  
+
+// This function hides the modal element
 function hideTrackRemovedModal() {
     trackRemovedNotificationDiv.classList.remove('is-active');
 }

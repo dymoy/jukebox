@@ -1,5 +1,6 @@
 var trackModal = $("#track-modal-card");
 var searchInputEl = $("#search-input");
+var searchBtnEl = $("#search-input-btn");
 var body = $("body");
 var queryErrorDiv = $("#query-error-div");
 var favoriteNotification = $("#favorite-notification");
@@ -41,8 +42,7 @@ function favoriteTrack() {
 
     // Check if the track is already favorited 
     if (isFavorited(trackTitle)) {
-        favoriteNotification.text("This song is already in your favorites!")
-        showTrackAddedText();
+        showTrackAddedText(false);
         return;
     }
 
@@ -56,10 +56,8 @@ function favoriteTrack() {
     };
 
     saveToLocalStorage(trackTitle, songObject);
-    favoriteNotification.text("Song added to favorites!");
-    showTrackAddedText();
+    showTrackAddedText(true);
 }
-
 
 // This function will save the favorited track into local storage 
 function saveToLocalStorage(trackTitle, songObject) {
@@ -71,19 +69,9 @@ function saveToLocalStorage(trackTitle, songObject) {
 // Display song information into Modal HTML element
 function presentTrack(trackData) {
     document.getElementById("album-art-image").src = trackData.albumOfTrack.coverArt.sources[0].url;
-    
-    document.getElementById(
-    "track-title"
-    ).innerHTML = `<b>Title :</b> ${trackData.name}`;
-
-    document.getElementById(
-    "track-artist"
-    ).innerHTML = `<b>Artist :</b> ${trackData.artists.items[0].profile.name}`;
-
-    document.getElementById(
-    "track-album"
-    ).innerHTML = `<b>Album :</b> ${trackData.albumOfTrack.name}`;
-
+    document.getElementById("track-title").innerHTML = `<b>Title :</b> ${trackData.name}`;
+    document.getElementById("track-artist").innerHTML = `<b>Artist :</b> ${trackData.artists.items[0].profile.name}`;
+    document.getElementById("track-album").innerHTML = `<b>Album :</b> ${trackData.albumOfTrack.name}`;
     document.getElementById("track-duration").innerHTML = `<b>Duration :</b> ${secondsToMinutes(trackData.duration.totalMilliseconds/1000)}`;
 
     loadIFrame(trackData); 
@@ -91,25 +79,21 @@ function presentTrack(trackData) {
 
 // This function calls the Spotify for Developers iFrame API to display a player for users to listen to a snippet of the queried track
 function loadIFrame(trackData) {
-    // Add the iFrame API script tag to your HTML page
-    var iFrameScript = "<script src='https://open.spotify.com/embed/iframe-api/v1'async>";
+    var iFrameScript = "<script src='https://open.spotify.com/embed/iframe-api/v1' id='iframe-api-script' async></script>";
     body.append(iFrameScript);
 
-    // Define the window.onSpotifyIframeApiReady function
     window.onSpotifyIframeApiReady = (IFrameAPI) => {
         var element = document.getElementById('embed-iframe');
-    
+
         const options = {
-          width: '100%',
-          height: '120',
-          uri: trackData.uri
+            width: '100%',
+            height: '80'
         };
 
         const callback = (EmbedController) => {
             EmbedController.loadUri(trackData.uri);
         }
 
-        // Create a controller object
         IFrameAPI.createController(element, options, callback);
     };
 }
@@ -120,19 +104,19 @@ async function queryInput() {
     var offset = getRandomOffset();
 
     const url =
-    "https://spotify23.p.rapidapi.com/search/?q=" +
-    q +
-    "&type=tracks&offset=" +
-    offset +
-    "&limit=1";
+        "https://spotify23.p.rapidapi.com/search/?q=" +
+        q +
+        "&type=tracks&offset=" +
+        offset +
+        "&limit=1";
 
     const options = {
-    method: "GET",
-    headers: {
-        "X-RapidAPI-Key": "1c600fb95amsh21018a7df31c5b0p1759f2jsn2f3a2b2758a2",
-        "X-RapidAPI-Host": "spotify23.p.rapidapi.com",
-    },
-  };
+        method: "GET",
+        headers: {
+            "X-RapidAPI-Key": "1c600fb95amsh21018a7df31c5b0p1759f2jsn2f3a2b2758a2",
+            "X-RapidAPI-Host": "spotify23.p.rapidapi.com",
+        },
+    };
 
   getAPI(url, options);
 }
