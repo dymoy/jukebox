@@ -1,8 +1,9 @@
 // Retrieve favorites from local storage
 var favorites = JSON.parse(localStorage.getItem("favorites")) || {};
-
 var favoritesContainer = document.getElementById("favorites-container");
 var noFavoritesMessage = document.getElementById("no-favorites-message");
+var trackRemovedNotificationDiv = document.getElementById("track-removed-modal");
+var modalContentDiv = document.getElementById("modal-card-body");
 
 // Collects an array of keys from local storage 
 if (Object.keys(favorites).length === 0) {
@@ -51,6 +52,7 @@ function removeFromFavorites(title) {
 
   if (favorites.hasOwnProperty(title)) {
     delete favorites[title];
+    showTrackRemovedModal();
 
     localStorage.setItem("favorites", JSON.stringify(favorites));
 
