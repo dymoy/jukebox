@@ -60,7 +60,7 @@ function getRandomOffset() {
 }
 
 // This function checks if the track is already favorited 
-function isFavorited(trackTitle) {
+function isFavorited(trackID) {
     var favorites = JSON.parse(localStorage.getItem("favorites")) || {};
-    return favorites.hasOwnProperty(trackTitle);
+    return favorites.hasOwnProperty(trackID);
 }

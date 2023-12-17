@@ -2,13 +2,14 @@ img {
     max-width: 450px;   
 }
 
-header, 
-#search-container {
+header {
     background-color: whitesmoke;
 }
 
-#search-container {
+#search-container,
+#no-favorites-message {
     border-radius: 5px;
+    background-color: whitesmoke;
 }
 
 #search-input-btn {
