@@ -36,7 +36,7 @@ function createFavoriteCard(favorite) {
                 <p class="is-size-7">${favorite.duration}</p>
             </div>
             <footer class="card-footer">
-                <button class="card-footer-item button is-danger m-3" onclick="removeFromFavorites('${favorite.title}')">
+                <button class="card-footer-item button is-danger m-3" onclick="removeFromFavorites('${favorite.id}')">
                     Remove
                 </button>
             </footer>

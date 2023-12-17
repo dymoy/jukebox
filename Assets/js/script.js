@@ -34,6 +34,7 @@ function getAPI(url, options) {
 
 // This favoriteTrack() funciton will save the track in local storage 
 function favoriteTrack() {
+    var trackID = document.getElementById("track-info").getAttribute("track-id");
     var trackTitle = document.getElementById("track-title").innerText;
     var trackArtist = document.getElementById("track-artist").innerText;
     var trackAlbum = document.getElementById("track-album").innerText;
@@ -41,13 +42,14 @@ function favoriteTrack() {
     var duration = document.getElementById("track-duration").innerText;
 
     // Check if the track is already favorited 
-    if (isFavorited(trackTitle)) {
+    if (isFavorited(trackID)) {
         showTrackAddedText(false);
         return;
     }
 
     // Create an object to store relevant track data 
     var songObject = {
+        id: trackID,
         title: trackTitle,
         artist: trackArtist,
         album: trackAlbum,
@@ -55,19 +57,20 @@ function favoriteTrack() {
         duration: duration,
     };
 
-    saveToLocalStorage(trackTitle, songObject);
+    saveToLocalStorage(trackID, songObject);
     showTrackAddedText(true);
 }
 
 // This function will save the favorited track into local storage 
-function saveToLocalStorage(trackTitle, songObject) {
+function saveToLocalStorage(trackID, songObject) {
     var favorites = JSON.parse(localStorage.getItem("favorites")) || {};
-    favorites[trackTitle] = songObject;
+    favorites[trackID] = songObject;
     localStorage.setItem("favorites", JSON.stringify(favorites));
 }
 
 // Display song information into Modal HTML element
 function presentTrack(trackData) {
+    document.getElementById("track-info").setAttribute("track-id", trackData.id);
     document.getElementById("album-art-image").src = trackData.albumOfTrack.coverArt.sources[0].url;
     document.getElementById("track-title").innerHTML = `<b>Title :</b> ${trackData.name}`;
     document.getElementById("track-artist").innerHTML = `<b>Artist :</b> ${trackData.artists.items[0].profile.name}`;
