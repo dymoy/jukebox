@@ -4,6 +4,8 @@ var favorites = JSON.parse(localStorage.getItem("favorites")) || {};
 var favoritesContainer = document.getElementById("favorites-container");
 var noFavoritesMessage = document.getElementById("no-favorites-message");
 
+var notification = $("#notification-fav");
+
 if (Object.keys(favorites).length === 0) {
   noFavoritesMessage.classList.remove("is-hidden");
 } else {
@@ -47,6 +49,7 @@ function removeFromFavorites(title) {
 
   if (favorites.hasOwnProperty(title)) {
     delete favorites[title];
+    showNotification("Song removed from favorites!", "danger");
 
     localStorage.setItem("favorites", JSON.stringify(favorites));
 
@@ -61,3 +64,27 @@ function removeFromFavorites(title) {
     }
   }
 }
+
+
+function showNotification(message, type = "info", timeout = 2000) {
+  notification
+    .removeClass()
+    .addClass(`notification is-${type}`)
+    .text(message)
+    .show();
+  setTimeout(() => {
+    notification.hide();
+  }, timeout);
+}
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  (document.querySelectorAll(".notification .delete") || []).forEach(
+    ($delete) => {
+      const $notification = $delete.parentNode;
+      $delete.addEventListener("click", () => {
+        $notification.parentNode.removeChild($notification);
+      });
+    }
+  );
+});

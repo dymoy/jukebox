@@ -1,8 +1,13 @@
 var musicModal = $("#track-modal-card");
 var searchInputEl = $("#search-input");
+var notification = $("#notification");
 
 function showModal() {
   musicModal.addClass("is-active");
+  $("#loading").removeClass("is-hidden");
+  $("#track-info").hide();
+  $("#track-album-art-container").hide();
+  $(".modal-card-foot").hide();
   queryInput();
 }
 
@@ -10,9 +15,19 @@ function closeModal() {
   musicModal.removeClass("is-active");
 }
 
+function showNotification(message, type = "info", timeout = 2000) {
+  notification
+    .removeClass()
+    .addClass(`notification is-${type}`)
+    .text(message)
+    .show();
+  setTimeout(() => {
+    notification.hide();
+  }, timeout);
+}
+
 // favoriteTrack() will save the track in local storage with (key: track title, val: song object)
 function favoriteTrack() {
-
   var trackTitle = document.getElementById("track-title").innerText;
   var trackArtist = document.getElementById("track-artist").innerText;
   var trackAlbum = document.getElementById("track-album").innerText;
@@ -20,7 +35,8 @@ function favoriteTrack() {
   var duration = document.getElementById("track-duration").innerText;
 
   if (isFavorited(trackTitle)) {
-    alert("This song is already in your favorites!");
+    // alert("This song is already in your favorites!");
+    showNotification("This song is already in your favorites!", "danger");
     return;
   }
 
@@ -33,7 +49,8 @@ function favoriteTrack() {
   };
 
   saveToLocalStorage(trackTitle, songObject);
-  alert("Song added to favorites!");
+  // alert("Song added to favorites!");
+  showNotification("Song added to favorites!", "success");
 }
 
 function isFavorited(trackTitle) {
@@ -47,24 +64,30 @@ function saveToLocalStorage(trackTitle, songObject) {
   localStorage.setItem("favorites", JSON.stringify(favorites));
 }
 
-
-
 // getAPI() function uses fetch method to get track data
 function getAPI(url, options) {
   fetch(url, options)
     .then(function (response) {
       // Check response status
-      if (response.status !== 200) { //200 : success
+      if (response.status !== 200) {
+        //200 : success
         // Endpoint not found
         console.log(response.status);
-        alert("No song found. Please try again.");
+        // alert("No song found. Please try again.");
+        showNotification("No song found. Please try again.", "danger");
+
         return;
       }
       return response.json();
     })
-    .then(function (data) { //sucess
+    .then(function (data) {
+      //sucess
       console.log(data);
       presentTrack(data.tracks.items[0].data);
+      $("#loading").addClass("is-hidden");
+      $("#track-info").show();
+      $("#track-album-art-container").show();
+      $(".modal-card-foot").show();
     });
 }
 
@@ -80,7 +103,6 @@ function presentTrack(trackData) {
   document.getElementById("album-art-image").src =
     trackData.albumOfTrack.coverArt.sources[0].url;
 
-
   document.getElementById(
     "track-title"
   ).innerHTML = `<b>Title :</b> ${trackData.name}`;
@@ -89,19 +111,21 @@ function presentTrack(trackData) {
     "track-artist"
   ).innerHTML = `<b>Artist :</b> ${trackData.artists.items[0].profile.name}`;
 
-
   document.getElementById(
     "track-album"
   ).innerHTML = `<b>Album :</b> ${trackData.albumOfTrack.name}`;
 
-  document.getElementById("track-duration").innerHTML = `<b>Duration :</b> ${secondsToMinutes(trackData.duration.totalMilliseconds/1000)}`;
+  document.getElementById(
+    "track-duration"
+  ).innerHTML = `<b>Duration :</b> ${secondsToMinutes(
+    trackData.duration.totalMilliseconds / 1000
+  )}`;
 }
-
 
 function secondsToMinutes(seconds) {
   var minutes = Math.floor(seconds / 60); //206/60 => minutes
-  var seconds = seconds - minutes * 60; // totalseconds - minutes * 60 
-  return minutes + "mins " + parseInt(seconds) +"secs";
+  var seconds = seconds - minutes * 60; // totalseconds - minutes * 60
+  return minutes + "mins " + parseInt(seconds) + "secs";
 }
 
 // queryURL() function constructs URL to fetch from Web API
@@ -126,3 +150,14 @@ async function queryInput() {
 
   getAPI(url, options);
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  (document.querySelectorAll(".notification .delete") || []).forEach(
+    ($delete) => {
+      const $notification = $delete.parentNode;
+      $delete.addEventListener("click", () => {
+        $notification.parentNode.removeChild($notification);
+      });
+    }
+  );
+});
