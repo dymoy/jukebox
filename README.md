@@ -56,7 +56,7 @@ The source code is found in the root directory of the main branch.
 
 Derek Moy (@dymoy) \
 Hayden Davis (@haydendavis2020) \
-Phillip Tombe (@Phillip-Tom) \
+Phillip Tombe (@Phillip-Tom) 
 
 
 ## License 
