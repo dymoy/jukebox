@@ -43,7 +43,7 @@ The source code is found in the root directory of the main branch.
 
 ### Screenshot of the landing page 
 
-!["Screenshot of the langing page."](./Assets/images/Jukebox_Favorites_Page.png)
+!["Screenshot of the landing page."](./Assets/images/Jukebox_Landing_Page.png)
 
 ### Screenshot of a returned track 
 !["Screenshot of a returned track."](./Assets/images/Returned_Track_Modal.png)
