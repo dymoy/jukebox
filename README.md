@@ -11,7 +11,7 @@ With the overwhelming amount of new music being published on a daily basis, it c
 N/A
 
 ## Usage 
-Use the following link to access the deployed webpage: 
+Use the following link to access the deployed webpage: \
 https://dymoy.github.io/jukebox/
 
 The source code is found in the root directory of the main branch. 
@@ -54,9 +54,9 @@ The source code is found in the root directory of the main branch.
 
 ## Contributors 
 
-Derek Moy (@dymoy)
-Hayden Davis (@haydendavis2020)
-Phillip Tombe (@Phillip-Tom)
+Derek Moy (@dymoy) \
+Hayden Davis (@haydendavis2020) \
+Phillip Tombe (@Phillip-Tom) \
 
 
 ## License 
